@@ -66,7 +66,7 @@ module.exports = {
           let mediaMess = await quoted.download();
           let stickerMess = new Sticker(mediaMess, {
             pack: packname,
-            author: pushName,
+            author: author,
             type: StickerTypes.FULL,
             categories: ["🤩", "🎉"],
             id: "12345",
@@ -88,7 +88,7 @@ module.exports = {
           }
           let stickerMess = new Sticker(mediaMess, {
             pack: packname,
-            author: pushName,
+            author: author,
             type: StickerTypes.FULL,
             categories: ["🤩", "🎉"],
             id: "12345",
@@ -113,8 +113,8 @@ module.exports = {
         }
         await doReact("🀄️");
         if (!args.join(" ")) {
-          var packName = pushName;
-          var authorName = pushName;
+          var packName = packname;
+          var authorName = author;
         } else if (args.join(" ").includes(",")) {
           var packName = args.join(" ").split(",")[0];
           var authorName = args.join(" ").split(",")[1];
@@ -151,7 +151,7 @@ module.exports = {
           let mediaMess = await quoted.download();
           let stickerMess = new Sticker(mediaMess, {
             pack: packname,
-            author: pushName,
+            author: author,
             type: StickerTypes.CROPPED,
             categories: ["🤩", "🎉"],
             id: "12345",
@@ -169,7 +169,7 @@ module.exports = {
           }
           let stickerMess = new Sticker(mediaMess, {
             pack: packname,
-            author: pushName,
+            author: author,
             type: StickerTypes.CROPPED,
             categories: ["🤩", "🎉"],
             id: "12345",
@@ -202,7 +202,7 @@ module.exports = {
 
           let stickerMess = new Sticker(meme, {
             pack: packname,
-            author: pushName,
+            author: author,
             type: StickerTypes.FULL,
             categories: ["🤩", "🎉"],
             id: "12345",
@@ -292,7 +292,7 @@ module.exports = {
 
         let stickerMess = new Sticker("quote.png", {
           pack: packname,
-          author: pushName,
+          author: author,
           type: StickerTypes.FULL,
           categories: ["🤩", "🎉"],
           id: "12345",
@@ -340,7 +340,7 @@ module.exports = {
 
         let stickerMess2 = new Sticker("emoji.png", {
           pack: packname,
-          author: pushName,
+          author: author,
           type: StickerTypes.FULL,
           categories: ["🤩", "🎉"],
           id: "12345",
