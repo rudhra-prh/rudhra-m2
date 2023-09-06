@@ -9,7 +9,7 @@ let mergedCommands = [
   "ppcouple",
   "couplepp",
   "gifsearch",
-  "gif",
+  "sgif",
   "pin",
   "pinterest",
 ];
@@ -20,22 +20,22 @@ module.exports = {
   uniquecommands:[
     "image",
     "couplepp",
-    "gif",
+    "sgif",
     "pin",
   ],
   description: "All picture related commands",
-  start: async (Atlas, m, { inputCMD, text, doReact, prefix}) => {
+  start: async (Rudhra, m, { inputCMD, text, doReact, prefix}) => {
     switch (inputCMD) {
       case "ppcouple":
       case "couplepp":
        await doReact("❤️");
         let imgRes = await axios.get("https://zany-teal-alligator-suit.cyclic.app/couple");
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           { image: { url: imgRes.data.male }, caption: `_For Him..._` },
           { quoted: m }
         );
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           { image: { url: imgRes.data.female }, caption: `_For Her..._` },
           { quoted: m }
@@ -64,7 +64,7 @@ module.exports = {
             },
           ];
           */
-          await Atlas.sendMessage(
+          await Rudhra.sendMessage(
             m.from,
             {
               image: { url: images },
@@ -77,7 +77,7 @@ module.exports = {
           );
         });
         break;
-      case "gif":
+      case "sgif":
       case "gifsearch":
         if (!text) {
           await doReact("❔")
@@ -89,7 +89,7 @@ module.exports = {
         );
         let resultGif = Math.floor(Math.random() * 12);
         let gifUrl = resGif.data.results[resultGif].media_formats.mp4.url;
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           {
             video: { url: gifUrl },
@@ -127,7 +127,7 @@ module.exports = {
               //buttons: buttons,
               //headerType: 4,
             };
-            Atlas.sendMessage(m.from, buttonMessage, { quoted: m });
+            Rudhra.sendMessage(m.from, buttonMessage, { quoted: m });
           })
           .catch((_) => _);
 

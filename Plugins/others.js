@@ -8,7 +8,7 @@ module.exports = {
   uniquecommands: ["toqr"],
   description: "Other commands",
   start: async (
-    Atlas,
+    Rudhra,
     m,
     { pushName, prefix, inputCMD, doReact, text, args, participants, isCreator }
   ) => {
@@ -24,7 +24,7 @@ module.exports = {
         const res = await getBuffer(
           `https://www.qrtag.net/api/qr_8.png?url=${text}`
         );
-        return Atlas.sendMessage(
+        return Rudhra.sendMessage(
           m.from,
           { image: res, caption: `\n*Source:* ${text}` },
           { quoted: m }

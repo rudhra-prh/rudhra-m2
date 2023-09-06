@@ -23,7 +23,7 @@ module.exports = {
   alias: [...mergedCommands],
   uniquecommands: ["song", "video", "ytmp3", "ytmp4"],
   description: "All file dowloader commands",
-  start: async (Atlas, m, { inputCMD, text, doReact, prefix, pushName }) => {
+  start: async (Rudhra, m, { inputCMD, text, doReact, prefix, pushName }) => {
     switch (inputCMD) {
       case "play":
       case "song":
@@ -34,13 +34,13 @@ module.exports = {
           );
         }
         await doReact("📥");
-        thumbAtlas = "https://graph.org/file/d0a287fa875c809f234ce.jpg";
+        thumbRudhra = "https://graph.org/file/d0a287fa875c809f234ce.jpg";
         songInfo = await yts(text);
         song = songInfo.videos[0];
         videoUrl = song.url;
         videoId = videoUrl.split("v=")[1];
 
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           {
             image: { url: song.thumbnail },
@@ -65,9 +65,9 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
               console.error("Error converting to opus:", err);
             })
             .on("end", async () => {
-              await Atlas.sendPresenceUpdate("recording", m.from);
+              await Rudhra.sendPresenceUpdate("recording", m.from);
 
-              Atlas.sendMessage(
+              Rudhra.sendMessage(
                 m.from,
                 {
                   audio: fs.readFileSync(outputPath),
@@ -104,9 +104,9 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
         song = songInfo.videos[0];
         videoUrl = song.url;
         videoId = videoUrl.split("v=")[1];
-        thumbAtlas = "https://graph.org/file/d0a287fa875c809f234ce.jpg";
+        thumbRudhra = "https://graph.org/file/d0a287fa875c809f234ce.jpg";
 
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           {
             image: { url: song.thumbnail },
@@ -131,11 +131,11 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
               console.error("Error converting to opus:", err);
             })
             .on("end", async () => {
-              const thumbnailBuffer = await getBuffer(thumbAtlas);
+              const thumbnailBuffer = await getBuffer(thumbRudhra);
 
-              await Atlas.sendPresenceUpdate("recording", m.from);
+              await Rudhra.sendPresenceUpdate("recording", m.from);
 
-              Atlas.sendMessage(
+              Rudhra.sendMessage(
                 m.from,
                 {
                   audio: fs.readFileSync(inputPath),
@@ -174,7 +174,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
         videoId = videoUrl.split("v=")[1];
         result = await yts(videoId);
 
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           {
             image: { url: song.thumbnail },
@@ -190,7 +190,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
         );
 
         const ytaud3 = await YT.mp4(videoUrl);
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           {
             video: { url: ytaud3.videoUrl },
@@ -215,7 +215,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
         videoUrl = song.url;
         videoId = videoUrl.split("v=")[1];
 
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           {
             image: { url: song.thumbnail },
@@ -231,7 +231,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
         );
 
         const ytaud2 = await YT.mp4(videoUrl);
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           {
             video: { url: ytaud2.videoUrl },
@@ -268,7 +268,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
           caption: txt,
         };
 
-        Atlas.sendMessage(m.from, buttonMessage, { quoted: m });
+        Rudhra.sendMessage(m.from, buttonMessage, { quoted: m });
         break;
 
       default:

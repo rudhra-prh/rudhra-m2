@@ -1,9 +1,9 @@
 const axios = require("axios");
 let mergedCommands = [
-  "igdl",
-  "instadl",
-  "fbdl",
-  "facebookdl",
+  "ig",
+  "insta",
+  "fb",
+  "facebook",
   "mediafiredl",
   "mediafire",
 ];
@@ -13,10 +13,10 @@ module.exports = {
   alias: [...mergedCommands],
   uniquecommands: ["igdl", "fbdl", "mediafiredl"],
   description: "All file dowloader commands",
-  start: async (Atlas, m, { inputCMD, text, doReact, prefix, pushName }) => {
+  start: async (Rudhra, m, { inputCMD, text, doReact, prefix, pushName }) => {
     switch (inputCMD) {
-      case "igdl":
-      case "instadl":
+      case "ig":
+      case "insta":
         if (!text) {
           await doReact("❌");
           return m.reply(
@@ -30,7 +30,7 @@ module.exports = {
           );
         }
         await doReact("📥");
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           { text: "*Please wait, I'm downloading your video...*" },
           { quoted: m }
@@ -42,7 +42,7 @@ module.exports = {
           );
           const scrappedURL = res.data.videoUrl;
 
-          Atlas.sendMessage(
+          Rudhra.sendMessage(
             m.from,
             {
               video: { url: scrappedURL },
@@ -88,7 +88,7 @@ Downloading...`;
         await doReact("📥");
         await m.reply(txt);
 
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           {
             document: { url: MDF[0].url },
@@ -99,8 +99,8 @@ Downloading...`;
         );
         break;
 
-      case "fbdl":
-      case "facebookdl":
+      case "fb":
+      case "facebook":
         if (!text) {
           await doReact("❌");
           return m.reply(
@@ -122,7 +122,7 @@ Downloading...`;
           );
           const scrappedURL = res.data.videoUrl;
 
-          Atlas.sendMessage(
+          Rudhra.sendMessage(
             m.from,
             {
               video: { url: scrappedURL },

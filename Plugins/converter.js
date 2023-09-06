@@ -9,14 +9,14 @@ const { getBuffer } = require("../System/Function2.js");
 
 const util = require("util");
 let mergedCommands = [
-  "toimg",
-  "toimage",
-  "togif",
-  "tomp4",
-  "tomp3",
+  "photo",
+  "topic",
+  "gif",
+  "mp4",
+  "mp3",
   "toaudio",
-  "tourl",
-  "topdf",
+  "url",
+  "pdf",
   "imgtopdf",
   "toqr",
 ];
@@ -25,25 +25,25 @@ module.exports = {
   name: "converters",
   alias: [...mergedCommands],
   uniquecommands: [
-    "toimg",
-    "togif",
-    "tomp4",
-    "tomp3",
+    "photo",
+    "gif",
+    "mp4",
+    "mp3",
     "toaudio",
-    "tourl",
-    "topdf",
+    "url",
+    "pdf",
     "imgtopdf",
     "toqr",
   ],
   description: "All converter related commands",
   start: async (
-    Atlas,
+    Rudhra,
     m,
     { inputCMD, text, quoted, doReact, prefix, mime }
   ) => {
     switch (inputCMD) {
-      case "toimg":
-      case "toimage":
+      case "photo":
+      case "topic":
         if (!m.quoted && !/webp/.test(mime)) {
           await doReact("❔");
           return m.reply(
@@ -51,12 +51,12 @@ module.exports = {
           );
         }
         await doReact("🎴");
-        let mediaMess = await Atlas.downloadAndSaveMediaMessage(quoted);
+        let mediaMess = await Rudhra.downloadAndSaveMediaMessage(quoted);
         let ran = await getRandom(".png");
         exec(`ffmpeg -i ${mediaMess} ${ran}`, (err) => {
           fs.unlinkSync(mediaMess);
           if (err) {
-            Atlas.sendMessage(
+            Rudhra.sendMessage(
               m.from,
               {
                 text: `Please mention a *Non-animated* sticker to process ! \n\nOr use *${prefix}togif* / *${prefix}tomp4*  to process *Animated* sticker !`,
@@ -66,7 +66,7 @@ module.exports = {
             return;
           }
           let buffer = fs.readFileSync(ran);
-          Atlas.sendMessage(
+          Rudhra.sendMessage(
             m.from,
             { image: buffer, caption: `_Converted by:_  *${botName}*\n` },
             { quoted: m }
@@ -75,7 +75,7 @@ module.exports = {
         });
         break;
 
-      case "tomp4":
+      case "mp4":
         if (!m.quoted && !/webp/.test(mime)) {
           await doReact("❔");
           return reply(
@@ -83,10 +83,10 @@ module.exports = {
           );
         }
         await doReact("🎴");
-        let mediaMess2 = await Atlas.downloadAndSaveMediaMessage(quoted);
+        let mediaMess2 = await Rudhra.downloadAndSaveMediaMessage(quoted);
         let webpToMp4 = await webp2mp4File(mediaMess2);
 
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           {
             video: { url: webpToMp4.result },
@@ -97,7 +97,7 @@ module.exports = {
         fs.unlinkSync(mediaMess2);
         break;
 
-      case "togif":
+      case "gif":
         if (!m.quoted && !/webp/.test(mime)) {
           await doReact("❔");
           return m.reply(
@@ -105,10 +105,10 @@ module.exports = {
           );
         }
         await doReact("🎴");
-        let mediaMess3 = await Atlas.downloadAndSaveMediaMessage(quoted);
+        let mediaMess3 = await Rudhra.downloadAndSaveMediaMessage(quoted);
         let webpToMp42 = await webp2mp4File(mediaMess3);
 
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           {
             video: { url: webpToMp42.result },
@@ -121,7 +121,7 @@ module.exports = {
 
         break;
 
-      case "tomp3":
+      case "toaudio":
         if (/document/.test(mime)) {
           await doReact("❌");
           return m.reply(
@@ -142,9 +142,9 @@ module.exports = {
         }
         await doReact("🎶");
         let media = await quoted.download();
-        await Atlas.sendPresenceUpdate("recording", m.from);
+        await Rudhra.sendPresenceUpdate("recording", m.from);
         let audio = await toAudio(media, "mp4");
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           {
             document: audio,
@@ -156,7 +156,7 @@ module.exports = {
 
         break;
 
-      case "toaudio":
+      case "mp3":
         if (/document/.test(mime)) {
           await doReact("❌");
           return m.reply(
@@ -177,23 +177,23 @@ module.exports = {
         }
         await doReact("🎶");
         let media2 = await quoted.download();
-        await Atlas.sendPresenceUpdate("recording", m.from);
+        await Rudhra.sendPresenceUpdate("recording", m.from);
         let audio2 = await toAudio(media2, "mp4");
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           { audio: audio2, mimetype: "audio/mpeg" },
           { quoted: m }
         );
         break;
 
-      case "tourl":
+      case "url":
         if (!m.quoted) {
           await doReact("❔");
           return m.reply(
             `Plese provide an *Image* / *Video* to generate a link! With Caption ${prefix}tourl`
           );
         }
-        let media5 = await Atlas.downloadAndSaveMediaMessage(quoted);
+        let media5 = await Rudhra.downloadAndSaveMediaMessage(quoted);
         if (/image/.test(mime)) {
           await doReact("🔗");
           let anu = await GraphOrg(media5);
@@ -206,7 +206,7 @@ module.exports = {
           } catch (e) {
             await doReact("❌");
             await fs.unlinkSync(media5);
-            return Atlas.sendMessage(
+            return Rudhra.sendMessage(
               m.from,
               {
                 text: `*Your video size is too big!*\n\n*Max video size:* 5MB`,
@@ -223,11 +223,11 @@ module.exports = {
         await fs.unlinkSync(media5);
         break;
 
-      case "topdf":
+      case "pdf":
       case "imgtopdf":
         if (/image/.test(mime)) {
           await doReact("📑");
-          let mediaMess4 = await Atlas.downloadAndSaveMediaMessage(quoted);
+          let mediaMess4 = await Rudhra.downloadAndSaveMediaMessage(quoted);
 
           async function generatePDF(path) {
             return new Promise((resolve, reject) => {
@@ -261,7 +261,7 @@ module.exports = {
             setTimeout(async () => {
               let pdf = fs.readFileSync(pdfPATH);
 
-              Atlas.sendMessage(
+              Rudhra.sendMessage(
                 m.from,
                 {
                   document: pdf,
@@ -296,7 +296,7 @@ module.exports = {
         const res = await getBuffer(
           `https://www.qrtag.net/api/qr_8.png?url=${text}`
         );
-        await Atlas.sendMessage(
+        await Rudhra.sendMessage(
           m.from,
           { image: res, caption: `\n*Source:* ${text}` },
           { quoted: m }

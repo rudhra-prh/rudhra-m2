@@ -12,7 +12,7 @@ module.exports = {
   uniquecommands: ["tiktok", "tiktokmp3", "tiktokmp4", "tiktokdoc"],
   description: "All Tiktok Downloader Commands",
   start: async (
-    Atlas,
+    Rudhra,
     m,
     {
       inputCMD,
@@ -27,7 +27,7 @@ module.exports = {
     if (!text) {
       await doReact("❌");
       return m.reply(
-        `Please provide a Toktok video link !\n\nExample: ${prefix}say Atlas MD is OP`
+        `Please provide a Toktok video link !\n\nExample: ${prefix}say Rudhra MD is OP`
       );
     }
     if (!text.includes("tiktok")) {
@@ -66,7 +66,7 @@ module.exports = {
 *${prefix}tiktokmp4 <link>*
 *${prefix}tiktokdoc <link>*`;
 
-        Atlas.sendMessage(
+        Rudhra.sendMessage(
           m.from,
           { image: { url: botImage1 }, caption: txtmain },
           { quoted: m }
@@ -80,7 +80,7 @@ module.exports = {
         require("../System/Tiktokscraper")
           .Tiktok(args[0])
           .then((data) => {
-            Atlas.sendMessage(
+            Rudhra.sendMessage(
               m.from,
               { audio: { url: data.audio }, mimetype: "audio/mpeg" },
               { quoted: m }
@@ -95,7 +95,7 @@ module.exports = {
         require("../System/Tiktokscraper")
           .Tiktok(args[0])
           .then((data) => {
-            Atlas.sendMessage(
+            Rudhra.sendMessage(
               m.from,
               {
                 video: { url: data.watermark },
@@ -113,7 +113,7 @@ module.exports = {
         require("../System/Tiktokscraper")
           .Tiktok(args[0])
           .then((data) => {
-            Atlas.sendMessage(
+            Rudhra.sendMessage(
               m.from,
               {
                 document: { url: data.audio },
