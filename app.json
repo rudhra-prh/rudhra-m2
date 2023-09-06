@@ -1,5 +1,5 @@
 {
-  "name": "Atlas-MD",
+  "name": "rudhra-md",
   "description": "The future of WhatsApp bots now with plugin support.",
   "keywords": [
     "bot",
@@ -14,9 +14,9 @@
     "baileys-md",
     "md-bot"
   ],
-  "website": "https://github.com/FantoX/Atlas-MD#readme",
-  "repository": "https://github.com/FantoX/Atlas-MD.git",
-  "logo": "https://graph.org/file/02abf0fd8fc2a13cc67a1.jpg",
+  "website": "https://github.com/princerudh/rudhra-md#readme",
+  "repository": "https://github.com/princerudh/rudhra-md.git",
+  "logo": "https://github.com/rudhra-prh/media/blob/main/image/rudhra1.jpg",
   "success_url": "/",
   "env": {
     "PREFIX": {
@@ -35,11 +35,11 @@
       "required": false
     },
     "PACKNAME": {
-      "description": "Put a sticker packname here. Default is: Atlas Bot",
+      "description": "Put a sticker packname here. Default is: Rudhra Bot",
       "required": false
     },
     "MONGODB": {
-      "description": "Put Your MongoDB URL. You can create MongoDB Atlas URL for free."
+      "description": "Put Your MongoDB URL. You can create MongoDB URL for free."
     },
     "OPENAI_API": {
       "description": "Put your OpenAI API key here if you want to use ChatGPT and DALL-E.",

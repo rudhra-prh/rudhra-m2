@@ -1,6 +1,6 @@
 require("./Configurations");
 const {
-  default: atlasConnect,
+  default: rudhraConnect,
   DisconnectReason,
   fetchLatestBaileysVersion,
   downloadContentFromMessage,
@@ -38,10 +38,10 @@ const store = makeInMemoryStore({
   }),
 });
 
-// Atlas Server configuration
+// Rudhra Server configuration
 let QR_GENERATE = "invalid";
 let status;
-const startAtlas = async () => {
+const startRudhra = async () => {
   try {
     await mongoose.connect(mongodb).then(() => {
       console.log(
@@ -60,7 +60,7 @@ const startAtlas = async () => {
 
   const { saveState, state, clearState } = await getAuthFromDatabase();
   console.log(
-    figlet.textSync("ATLAS", {
+    figlet.textSync("RUDHRA", {
       font: "Standard",
       horizontalLayout: "default",
       vertivalLayout: "default",
@@ -74,17 +74,17 @@ const startAtlas = async () => {
 
   const { version, isLatest } = await fetchLatestBaileysVersion();
 
-  const Atlas = atlasConnect({
+  const Rudhra = rudhraConnect({
     logger: pino({ level: "silent" }),
     printQRInTerminal: true,
-    browser: ["Atlas", "Safari", "1.0.0"],
+    browser: ["Rudhra", "Safari", "1.0.0"],
     auth: state,
     version,
   });
 
-  store.bind(Atlas.ev);
+  store.bind(Rudhra.ev);
 
-  Atlas.public = true;
+  Rudhra.public = true;
 
   async function installPlugin() {
     console.log(chalk.yellow("Checking for Plugins...\n"));
@@ -102,7 +102,7 @@ const startAtlas = async () => {
 
     if (!plugins.length || plugins.length == 0) {
       console.log(
-        chalk.redBright("No Extra Plugins Installed ! Starting Atlas...\n")
+        chalk.redBright("No Extra Plugins Installed ! Starting Rudhra...\n")
       );
     } else {
       console.log(
@@ -125,7 +125,7 @@ const startAtlas = async () => {
       }
       console.log(
         chalk.greenBright(
-          "All Plugins Installed Successfully ! Starting Atlas...\n"
+          "All Plugins Installed Successfully ! Starting Rudhra...\n"
         )
       );
     }
@@ -133,47 +133,47 @@ const startAtlas = async () => {
 
   await readcommands();
 
-  Atlas.ev.on("creds.update", saveState);
-  Atlas.serializeM = (m) => smsg(Atlas, m, store);
-  Atlas.ev.on("connection.update", async (update) => {
+  Rudhra.ev.on("creds.update", saveState);
+  Rudhra.serializeM = (m) => smsg(Rudhra, m, store);
+  Rudhra.ev.on("connection.update", async (update) => {
     const { lastDisconnect, connection, qr } = update;
     if (connection) {
-      console.info(`[ ATLAS ] Server Status => ${connection}`);
+      console.info(`[ RUDHRA ] Server Status => ${connection}`);
     }
 
     if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
       if (reason === DisconnectReason.badSession) {
         console.log(
-          `[ ATLAS ] Bad Session File, Please Delete Session and Scan Again.\n`
+          `[ RUDHRA ] Bad Session File, Please Delete Session and Scan Again.\n`
         );
         process.exit();
       } else if (reason === DisconnectReason.connectionClosed) {
-        console.log("[ ATLAS ] Connection closed, reconnecting....\n");
-        startAtlas();
+        console.log("[ RUDHRA ] Connection closed, reconnecting....\n");
+        startRudhra();
       } else if (reason === DisconnectReason.connectionLost) {
-        console.log("[ ATLAS ] Connection Lost from Server, reconnecting...\n");
-        startAtlas();
+        console.log("[ RUDHRA ] Connection Lost from Server, reconnecting...\n");
+        startRudhra();
       } else if (reason === DisconnectReason.connectionReplaced) {
         console.log(
-          "[ ATLAS ] Connection Replaced, Another New Session Opened, Please Close Current Session First!\n"
+          "[ RUDHRA ] Connection Replaced, Another New Session Opened, Please Close Current Session First!\n"
         );
         process.exit();
       } else if (reason === DisconnectReason.loggedOut) {
         clearState();
         console.log(
-          `[ ATLAS ] Device Logged Out, Please Delete Session and Scan Again.\n`
+          `[ RUDHRA ] Device Logged Out, Please Delete Session and Scan Again.\n`
         );
         process.exit();
       } else if (reason === DisconnectReason.restartRequired) {
-        console.log("[ ATLAS ] Server Restarting...\n");
-        startAtlas();
+        console.log("[ RUDHRA ] Server Restarting...\n");
+        startRudhra();
       } else if (reason === DisconnectReason.timedOut) {
-        console.log("[ ATLAS ] Connection Timed Out, Trying to Reconnect...\n");
-        startAtlas();
+        console.log("[ RUDHRA ] Connection Timed Out, Trying to Reconnect...\n");
+        startRudhra();
       } else {
         console.log(
-          `[ ATLAS ] Server Disconnected: "It's either safe disconnect or WhatsApp Account got banned !\n"`
+          `[ RUDHRA ] Server Disconnected: "It's either safe disconnect or WhatsApp Account got banned !\n"`
         );
       }
     }
@@ -182,28 +182,28 @@ const startAtlas = async () => {
     }
   });
 
-  Atlas.ev.on("group-participants.update", async (m) => {
-    welcomeLeft(Atlas, m);
+  Rudhra.ev.on("group-participants.update", async (m) => {
+    welcomeLeft(Rudhra, m);
   });
 
-  Atlas.ev.on("messages.upsert", async (chatUpdate) => {
-    m = serialize(Atlas, chatUpdate.messages[0]);
+  Rudhra.ev.on("messages.upsert", async (chatUpdate) => {
+    m = serialize(Rudhra, chatUpdate.messages[0]);
 
     if (!m.message) return;
     if (m.key && m.key.remoteJid == "status@broadcast") return;
     if (m.key.id.startsWith("BAE5") && m.key.id.length == 16) return;
 
-    require("./Core.js")(Atlas, m, commands, chatUpdate);
+    require("./Core.js")(Rudhra, m, commands, chatUpdate);
   });
 
-  Atlas.getName = (jid, withoutContact = false) => {
-    id = Atlas.decodeJid(jid);
-    withoutContact = Atlas.withoutContact || withoutContact;
+  Rudhra.getName = (jid, withoutContact = false) => {
+    id = Rudhra.decodeJid(jid);
+    withoutContact = Rudhra.withoutContact || withoutContact;
     let v;
     if (id.endsWith("@g.us"))
       return new Promise(async (resolve) => {
         v = store.contacts[id] || {};
-        if (!(v.name || v.subject)) v = Atlas.groupMetadata(id) || {};
+        if (!(v.name || v.subject)) v = Rudhra.groupMetadata(id) || {};
         resolve(
           v.name ||
             v.subject ||
@@ -219,8 +219,8 @@ const startAtlas = async () => {
               id,
               name: "WhatsApp",
             }
-          : id === Atlas.decodeJid(Atlas.user.id)
-          ? Atlas.user
+          : id === Rudhra.decodeJid(Rudhra.user.id)
+          ? Rudhra.user
           : store.contacts[id] || {};
     return (
       (withoutContact ? "" : v.name) ||
@@ -232,7 +232,7 @@ const startAtlas = async () => {
     );
   };
 
-  Atlas.decodeJid = (jid) => {
+  Rudhra.decodeJid = (jid) => {
     if (!jid) return jid;
     if (/:\d+@/gi.test(jid)) {
       let decode = jidDecode(jid) || {};
@@ -243,9 +243,9 @@ const startAtlas = async () => {
     } else return jid;
   };
 
-  Atlas.ev.on("contacts.update", (update) => {
+  Rudhra.ev.on("contacts.update", (update) => {
     for (let contact of update) {
-      let id = Atlas.decodeJid(contact.id);
+      let id = Rudhra.decodeJid(contact.id);
       if (store && store.contacts)
         store.contacts[id] = {
           id,
@@ -254,7 +254,7 @@ const startAtlas = async () => {
     }
   });
 
-  Atlas.downloadAndSaveMediaMessage = async (
+  Rudhra.downloadAndSaveMediaMessage = async (
     message,
     filename,
     attachExtension = true
@@ -276,7 +276,7 @@ const startAtlas = async () => {
     return trueFileName;
   };
 
-  Atlas.downloadMediaMessage = async (message) => {
+  Rudhra.downloadMediaMessage = async (message) => {
     let mime = (message.msg || message).mimetype || "";
     let messageType = message.mtype
       ? message.mtype.replace(/Message/gi, "")
@@ -290,14 +290,14 @@ const startAtlas = async () => {
     return buffer;
   };
 
-  Atlas.parseMention = async (text) => {
+  Rudhra.parseMention = async (text) => {
     return [...text.matchAll(/@([0-9]{5,16}|0)/g)].map(
       (v) => v[1] + "@s.whatsapp.net"
     );
   };
 
-  Atlas.sendText = (jid, text, quoted = "", options) =>
-    Atlas.sendMessage(
+  Rudhra.sendText = (jid, text, quoted = "", options) =>
+    Rudhra.sendMessage(
       jid,
       {
         text: text,
@@ -308,7 +308,7 @@ const startAtlas = async () => {
       }
     );
 
-  Atlas.getFile = async (PATH, save) => {
+  Rudhra.getFile = async (PATH, save) => {
     let res;
     let data = Buffer.isBuffer(PATH)
       ? PATH
@@ -340,8 +340,8 @@ const startAtlas = async () => {
     };
   };
 
-  Atlas.setStatus = (status) => {
-    Atlas.query({
+  Rudhra.setStatus = (status) => {
+    Rudhra.query({
       tag: "iq",
       attrs: {
         to: "@s.whatsapp.net",
@@ -359,8 +359,8 @@ const startAtlas = async () => {
     return status;
   };
 
-  Atlas.sendFile = async (jid, PATH, fileName, quoted = {}, options = {}) => {
-    let types = await Atlas.getFile(PATH, true);
+  Rudhra.sendFile = async (jid, PATH, fileName, quoted = {}, options = {}) => {
+    let types = await Rudhra.getFile(PATH, true);
     let { filename, size, ext, mime, data } = types;
     let type = "",
       mimetype = mime,
@@ -384,7 +384,7 @@ const startAtlas = async () => {
     else if (/video/.test(mime)) type = "video";
     else if (/audio/.test(mime)) type = "audio";
     else type = "document";
-    await Atlas.sendMessage(
+    await Rudhra.sendMessage(
       jid,
       {
         [type]: {
@@ -403,7 +403,7 @@ const startAtlas = async () => {
   };
 };
 
-startAtlas();
+startRudhra();
 
 app.use("/", express.static(join(__dirname, "Frontend")));
 
