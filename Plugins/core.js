@@ -94,7 +94,7 @@ module.exports = {
 
             formatted += `┌─⊷ *${capitalizedFile}* \n\n`;
             formatted += `\`\`\`${commands
-              .map((cmd) => `▢   ${prefix + cmd}`)
+              .map((cmd) => `▢  ${prefix + cmd}`)
               .join("\n")}\`\`\`\n└───────────⊷\n`;
           }
 
