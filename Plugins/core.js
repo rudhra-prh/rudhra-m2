@@ -92,9 +92,9 @@ module.exports = {
               file.replace(".js", "").charAt(0).toUpperCase() +
               file.replace(".js", "").slice(1);
 
-            formatted += `┌─⊷ *${capitalizedFile}* \n\n`;
+            formatted += `┌─⊷ *${capitalizedFile}* \n▢\n`;
             formatted += `\`\`\`${commands
-              .map((cmd) => `▢  ${prefix + cmd}`)
+              .map((cmd) => `▢ ${prefix + cmd}`)
               .join("\n")}\`\`\`\n└───────────⊷\n`;
           }
 
@@ -105,7 +105,7 @@ module.exports = {
 
         const allCommands = readUniqueCommands(pluginsDir);
         const formattedCommands = formatCommands(allCommands);
-        var helpText = `\nKonnichiwa *${pushName}* Senpai,\n\nI am *${botName}*, a WhatsApp bot built to take your boring WhatsApp experience into next level.\n\n*🔖 My Prefix is:*  ${prefix}\n\n${formattedCommands}\n\n\n*©️ Team RUDHRA- 2023*`;
+        var helpText = `\n*Hello 👋* *${pushName}* ,\n\nI am *${botName}*, a WhatsApp bot built to take your boring WhatsApp experience into next level.\n\n*🔖 My Prefix is:*  ${prefix}\n\n${formattedCommands}\n\n\n*©️ Team RUDHRA- 2023*`;
         await Rudhra.sendMessage(
           m.from,
           { video: { url: botVideo }, gifPlayback: true, caption: helpText },
