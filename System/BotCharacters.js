@@ -1,6 +1,6 @@
 global.charID0 = {
     botName : "ʀᴜᴅʜʀᴀ ᴍᴅ",
-    botVideo : "https://graph.org/file/e3b2ee218b98b8679bf98.mp4",
+    botVideo : "https://graph.org/file/1c51c5f50af35004a7090.mp4",
     botImage1 : "https://github.com/rudhra-prh/media/blob/main/image/rudhra2.jpg",
     botImage2 : "https://github.com/rudhra-prh/media/blob/main/image/rudhra2.jpg",
     botImage3 : "https://github.com/rudhra-prh/media/blob/main/image/rudhra2.jpg",
