@@ -1,6 +1,6 @@
 {
   "name": "rudhra",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "The future of WhatsApp bots with plugin support.",
   "main": "index.js",
   "scripts": {
@@ -76,11 +76,11 @@
     "wa-sticker-formatter": "^4.4.4",
     "ws": "^8.0.0",
     "youtube-yts": "^2.0.0",
-    "youtubedl-core": "^4.11.5"
+    "youtubedl-core": "^4.11.7"
   },
   "devDependencies": {
     "jimp": "^0.16.1",
-    "link-preview-js": "^3.0.0",
+    "link-preview-js": "^3.0.5",
     "qrcode-terminal": "^0.12.0",
     "sharp": "^0.30.5"
   },
