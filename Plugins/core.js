@@ -108,7 +108,7 @@ module.exports = {
 
         const allCommands = readUniqueCommands(pluginsDir);
         const formattedCommands = formatCommands(allCommands);
-        var helpText = `\n ╔═══❮ *RUDHRA-MD* ❯═══•
+        var helpText = `\n╔═══❮ *RUDHRA-MD* ❯═══•
 ║╔═══════════════◉
 ║║ *Hello*👋 *${pushName}* ,
 ║║ *ʙᴏᴛɴᴀᴍᴇ* : ʀᴜᴅʜʀᴀ-ᴍᴅ
