@@ -308,7 +308,7 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
     };
     const uptime = () => formatTime(process.uptime());
 
-    let upTxt = `〘  ${botName} Personal Edition  〙    ⚡ Uptime: ${uptime()}`;
+    let upTxt = `×͜× ${botName}ッ ɪs ᴀᴠᴀɪʟᴀʙʟᴇ ɴᴏᴡ 📌: ${uptime()}`;
     Rudhra.setStatus(upTxt);
 
     cmd.start(Rudhra, m, {
