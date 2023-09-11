@@ -1,5 +1,4 @@
 const fs = require("fs");
-const axios = require("axios");
 const Jimp = require("jimp");
 const moment = require("moment-timezone");
 const {
@@ -706,7 +705,7 @@ module.exports = {
 ▢ ${message2}
 \n\n`;
         for (let mem of participants) {
-          mess += `${num++} @${mem.id.split("@")[0]}\n`;
+          mess += `│▸ @${mem.id.split("@")[0]}\n`;
         }
         mess += `└────────────⊷\n\n                    *Thank You*\n`;
 
@@ -864,5 +863,4 @@ async function generatePP(buffer) {
     img: await cropped.scaleToFit(720, 720).getBufferAsync(Jimp.MIME_JPEG),
     preview: await cropped.normalize().getBufferAsync(Jimp.MIME_JPEG),
   };
-    }
-                
+}

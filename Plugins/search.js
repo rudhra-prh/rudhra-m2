@@ -102,16 +102,16 @@ module.exports = {
             `Please provide an Youtube Search Term !\n\nExample: *${prefix}yts Despacito*`
           );
         }
-        await doReact("📜");
+        await doReact("🔍");
         let search = await yts(text);
         let thumbnail2 = search.all[0].thumbnail;
         let num = 1;
 
-        let txt2 = `*🏮 YouTube Search Engine 🏮*\n\n_🧩 Search Term:_ *${text}*\n\n*📌 Total Results:* *${search.all.length}*\n`;
+        let txt2 = `*❮ YouTube Search Engine ❯*\n\n*⬡ Search Term:* *${text}*\n\n*⬡ Total Results:* *${search.all.length}*\n`;
         for (let i of search.all) {
-          txt2 += `\n_Result:_ *${num++}*\n_🎀 Title:_ *${
+          txt2 += `\n*Result:* *${num++}*\n*⬡ Title: *${
             i.title
-          }*\n_🔶 Duration:_ *${i.timestamp}*\n_🔷 Link:_ ${i.url}\n\n`;
+          }*\n*⬡ Duration: *${i.timestamp}*\n*⬡ Link:* ${i.url}\n\n`;
         }
 
         /*let nums =1;
