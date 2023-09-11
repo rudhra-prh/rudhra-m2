@@ -21,7 +21,7 @@ let mergedCommands = [
   "welcome",
   "del",
   "demote",
-  "gclink",
+  "invite",
   "grouplink",
   "group",
   "gc",
@@ -34,7 +34,7 @@ let mergedCommands = [
   "remove",
   "revoke",
   "setgcdesc",
-  "setppgc",
+  "gpp",
   "tagall",
   "chatbotgc",
   "antilink",
@@ -49,7 +49,7 @@ module.exports = {
     "setgcname",
     "delete",
     "demote",
-    "gclink",
+    "invite",
     "antilink",
     "welcome",
     "group",
@@ -62,7 +62,7 @@ module.exports = {
     "remove",
     "revoke",
     "setgcdesc",
-    "setppgc",
+    "gpp",
     "chatbotgc",
   ],
   description: "All Audio Editing Commands",
@@ -262,7 +262,7 @@ module.exports = {
 
         break;
 
-      case "gclink":
+      case "invite":
       case "grouplink":
         if (!isBotAdmin) {
           await doReact("❌");
@@ -549,7 +549,7 @@ module.exports = {
 
         break;
 
-      case "setppgc":
+      case "gpp":
         if (!isAdmin) {
           await doReact("❌");
           return m.reply(`*You* must be *Admin* in order to use this Command!`);
@@ -565,7 +565,7 @@ module.exports = {
             m.from,
             {
               text: `Send/reply Image With Caption ${
-                prefix + "setgcpp"
+                prefix + "gpp"
               } to change the Profile Pic of this group.`,
             },
             { quoted: m }
@@ -705,7 +705,7 @@ module.exports = {
 ▢ ${message2}
 \n\n`;
         for (let mem of participants) {
-          mess += `│▸ @${mem.id.split("@")[0]}\n`;
+          mess += `${num++} @${mem.id.split("@")[0]}\n`;
         }
         mess += `└────────────⊷\n\n                    *Thank You*\n`;
 
@@ -863,4 +863,5 @@ async function generatePP(buffer) {
     img: await cropped.scaleToFit(720, 720).getBufferAsync(Jimp.MIME_JPEG),
     preview: await cropped.normalize().getBufferAsync(Jimp.MIME_JPEG),
   };
-}
+    }
+                
