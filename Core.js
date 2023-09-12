@@ -204,7 +204,7 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
     if (body == prefix) {
       await doReact("❌");
       return m.reply(
-        `Bot is active, type *${prefix}help* to see the list of commands.`
+        `Bot is active`
       );
     }
     if (body.startsWith(prefix) && !icmd) {
@@ -213,7 +213,7 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
         `*${budy.replace(
           prefix,
           ""
-        )}* - Command not found or plug-in not installed !\n\nIf you want to see the list of commands, type:    *_${prefix}help_*\n\nOr type:  *_${prefix}pluginlist_* to see installable plug-in list.`
+        )}*   Command not found or plugin not installed !\n\nIf you want to see the list of commands, type:   *${prefix}help* OR *${prefix}menu*`
       );
     }
 
@@ -222,7 +222,7 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
       if (budy.includes(`https://chat.whatsapp.com/${linkgce}`)) {
         return;
       } else if (budy.includes(`https://chat.whatsapp`)) {
-        const bvl = `\`\`\`「  Antilink System  」\`\`\`\n\n*⚠️ Group link detected !*\n\n*🚫 You are not allowed to send group links in this group !*\n`;
+        const bvl = `•──❮ Antilink System ❯──•\n\n*⚠️ Group link detected !*\n\n*🚫 You are not allowed to send group links in this group !*\n`;
         await Rudhra.sendMessage(
           from,
           {
