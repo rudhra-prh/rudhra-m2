@@ -12,7 +12,7 @@ let mergedCommands = [
   "ytaudio",
   "yta",
   "ytmp4",
-  "mp4",
+  "vmp4",
   "ytvideo",
   "ytv",
   "video",
@@ -155,7 +155,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
         break;
 
       case "ytmp4":
-      case "mp4":
+      case "vmp4":
       case "ytvideo":
         if (
           !text ||
