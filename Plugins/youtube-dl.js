@@ -8,11 +8,9 @@ let mergedCommands = [
   "play",
   "song",
   "ytmp3",
-  "mp3",
   "ytaudio",
   "yta",
   "ytmp4",
-  "vmp4",
   "ytvideo",
   "ytv",
   "video",
@@ -86,7 +84,6 @@ module.exports = {
         break;
 
       case "ytmp3":
-      case "mp3":
       case "ytaudio":
         if (
           !text ||
@@ -275,4 +272,3 @@ module.exports = {
     }
   },
 };
-          
