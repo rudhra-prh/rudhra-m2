@@ -44,13 +44,12 @@ module.exports = {
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\n⬡  Downloading: *${song.title}*
-            
-⬡  Duration: *${song.timestamp}*
-
-⬡  Channel Name: *${song.author.name}*
-
-⬡  Video Uploaded: *${song.ago}*\n`,
+            caption: `\n┌────[ *ᴅᴏᴡɴʟᴏᴅɪɴɢ* ]──···▸
+❏▸ Duration: *${song.timestamp}* 
+❏▸ Channel: *${song.author.name}*
+❏▸ Upload: *${song.ago}*
+❏
+└────────────────···▸\n`,
           },
           { quoted: m }
         );
@@ -110,7 +109,7 @@ module.exports = {
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\n⬡  Downloading: *${song.title}*
+            caption: `\n*Downloading:* *${song.title}*
             
 ⬡  Duration: *${song.timestamp}*
 
@@ -178,7 +177,7 @@ module.exports = {
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\n⬡  Downloading: *${song.title}*
+            caption: `\n*Downloading:* *${song.title}*
             
 ⬡  Duration: *${song.timestamp}*
 
@@ -219,7 +218,7 @@ module.exports = {
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\n⬡  Downloading: *${song.title}*
+            caption: `\n*Downloading:* *${song.title}*
             
 ⬡  Duration: *${song.timestamp}*
 
@@ -276,3 +275,4 @@ module.exports = {
     }
   },
 };
+          
