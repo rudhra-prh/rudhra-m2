@@ -12,7 +12,7 @@ let mergedCommands = [
   "ytaudio",
   "yta",
   "ytmp4",
-  "mp4",
+  "vmp4",
   "ytvideo",
   "ytv",
   "video",
@@ -44,13 +44,13 @@ module.exports = {
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\nDownloading: *${song.title}*
+            caption: `\n⬡  Downloading: *${song.title}*
             
-_🕛 Duration:_ *${song.timestamp}*
+⬡  Duration: *${song.timestamp}*
 
-_🎀 Channel Name:_ *${song.author.name}*
+⬡  Channel Name: *${song.author.name}*
 
-_🏮 Video Uploaded:_ *${song.ago}*\n`,
+⬡  Video Uploaded: *${song.ago}*\n`,
           },
           { quoted: m }
         );
@@ -110,13 +110,13 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\nDownloading: *${song.title}*
+            caption: `\n⬡  Downloading: *${song.title}*
             
-_🕛 Duration:_ *${song.timestamp}*
+⬡  Duration: *${song.timestamp}*
 
-_🎀 Channel Name:_ *${song.author.name}*
+⬡  Channel Name: *${song.author.name}*
 
-_🏮 Video Uploaded:_ *${song.ago}*\n`,
+⬡  Video Uploaded: *${song.ago}*\n`,
           },
           { quoted: m }
         );
@@ -155,7 +155,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
         break;
 
       case "ytmp4":
-      case "mp4":
+      case "vmp4":
       case "ytvideo":
         if (
           !text ||
@@ -178,13 +178,13 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\nDownloading: *${song.title}*
+            caption: `\n⬡  Downloading: *${song.title}*
             
-_🕛 Duration:_ *${song.timestamp}*
+⬡  Duration: *${song.timestamp}*
 
-_🎀 Channel Name:_ *${song.author.name}*
+⬡  Channel Name: *${song.author.name}*
 
-_🏮 Video Uploaded:_ *${song.ago}*\n`,
+⬡  Video Uploaded: *${song.ago}*\n`,
           },
           { quoted: m }
         );
@@ -194,7 +194,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
           m.from,
           {
             video: { url: ytaud3.videoUrl },
-            caption: `${song.title} By: *${botName}*`,
+            caption: `${song.title} By: Rudhra`,
           },
           { quoted: m }
         );
@@ -219,13 +219,13 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\nDownloading: *${song.title}*
+            caption: `\n⬡  Downloading: *${song.title}*
             
-_🕛 Duration:_ *${song.timestamp}*
+⬡  Duration: *${song.timestamp}*
 
-_🎀 Channel Name:_ *${song.author.name}*
+⬡   Channel Name: *${song.author.name}*
 
-_🏮 Video Uploaded:_ *${song.ago}*\n`,
+⬡   Video Uploaded: *${song.ago}*\n`,
           },
           { quoted: m }
         );
@@ -235,7 +235,7 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
           m.from,
           {
             video: { url: ytaud2.videoUrl },
-            caption: `${song.title} By: *${botName}*`,
+            caption: `${song.title} By: Rudhra`,
           },
           { quoted: m }
         );
@@ -248,19 +248,19 @@ _🏮 Video Uploaded:_ *${song.ago}*\n`,
           await doReact("❌");
           return m.reply(`Please provide a search term!`);
         }
-        await doReact("📥");
+        await doReact("🔍");
         let search = await yts(text);
         let thumbnail = search.all[0].thumbnail;
         let num = 1;
 
-        var txt = `*🏮 YouTube Search Engine 🏮*\n\n_🧩 Search Term:_ *${args.join(
+        var txt = `*[ YouTube Search ]*\n\n⬡  Search Term: *${args.join(
           " "
-        )}*\n\n*📌 Total Results:* *${search.all.length}*\n`;
+        )}*\n\n*⬡  Total Results:* *${search.all.length}*\n`;
 
         for (let i of search.all) {
-          txt += `\n_Result:_ *${num++}*\n_🎀 Title:_ *${
+          txt += `\n⬡  Result: *${num++}*\n⬡  Title: *${
             i.title
-          }*\n_🔶 Duration:_ *${i.timestamp}*\n_🔷 Link:_ ${i.url}\n\n`;
+          }*\n⬡  Duration: *${i.timestamp}*\n⬡  Link: ${i.url}\n\n`;
         }
 
         let buttonMessage = {
