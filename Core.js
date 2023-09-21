@@ -202,9 +202,9 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
     }
 
     if (body == prefix) {
-      await doReact("❌");
+      await doReact("⚡");
       return m.reply(
-        `Bot is active`
+        `*Bot is Active✓*`
       );
     }
     if (body.startsWith(prefix) && !icmd) {
@@ -213,7 +213,7 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
         `*${budy.replace(
           prefix,
           ""
-        )}*   Command not found or plugin not installed !\n\nIf you want to see the list of commands, type:   *${prefix}help* OR *${prefix}menu*`
+        )}*   command not found*`
       );
     }
 
