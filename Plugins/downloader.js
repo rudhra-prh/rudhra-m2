@@ -11,7 +11,7 @@ let mergedCommands = [
 module.exports = {
   name: "downloader",
   alias: [...mergedCommands],
-  uniquecommands: ["igdl", "fbdl", "mediafiredl"],
+  uniquecommands: ["insta", "fb", "mediafire"],
   description: "All file dowloader commands",
   start: async (Rudhra, m, { inputCMD, text, doReact, prefix, pushName }) => {
     switch (inputCMD) {
@@ -20,13 +20,13 @@ module.exports = {
         if (!text) {
           await doReact("❌");
           return m.reply(
-            `Please provide a valid instagram Reel/Video link !\n\nExample: *${prefix}igdl https://www.instagram.com/p/CP7Y4Y8J8ZU/*`
+            `Please provide a valid instagram Reel/Video link !\n\nExample: *${prefix}insta https://www.instagram.com/p/CP7Y4Y8J8ZU/*`
           );
         }
         if (!text.includes("instagram")) {
           await doReact("❌");
           return m.reply(
-            `Please provide a valid instagram Reel/Video link !\n\nExample: *${prefix}igdl https://www.instagram.com/p/CP7Y4Y8J8ZU/*`
+            `Please provide a valid instagram Reel/Video link !\n\nExample: *${prefix}insta https://www.instagram.com/p/CP7Y4Y8J8ZU/*`
           );
         }
         await doReact("📥");
@@ -46,7 +46,7 @@ module.exports = {
             m.from,
             {
               video: { url: scrappedURL },
-              caption: `Downloaded by: *${botName}* \n\n_*🎀 Powered by:*_ *Scrappy API - by FantoX*\n\n_*🧩 Url:*_ https://github.com/FantoX001/Scrappy-API \n`,
+              caption: ` `,
             },
             { quoted: m }
           );
@@ -77,11 +77,11 @@ module.exports = {
         if (MDF[0].size.split("MB")[0] >= 100)
           return m.reply("File is too large in size!");
 
-        let txt = `        *『 Mediafire Downloader 』*
+        let txt = `        *[ Mediafire Downloader ]*
         
-*🎀 File Name* : ${MDF[0].nama}
-*🧩 File Size* : ${MDF[0].size}
-*📌 File Format* : ${MDF[0].mime}
+*❏ File Name* : ${MDF[0].nama}
+*❏ File Size* : ${MDF[0].size}
+*❏ File Format* : ${MDF[0].mime}
 
 Downloading...`;
 
@@ -104,13 +104,13 @@ Downloading...`;
         if (!text) {
           await doReact("❌");
           return m.reply(
-            `Please provide a valid Facebook link !\n\nExample: *${prefix}fbdl put_link*`
+            `Please provide a valid Facebook link !\n\nExample: *${prefix}fb put_link*`
           );
         }
         if (!text.includes("fb") && !text.includes("facebook")) {
           await doReact("❌");
           return m.reply(
-            `Please provide a valid Facebook link !\n\nExample: *${prefix}fbdl put_link*`
+            `Please provide a valid Facebook link !\n\nExample: *${prefix}fb put_link*`
           );
         }
 
@@ -126,7 +126,7 @@ Downloading...`;
             m.from,
             {
               video: { url: scrappedURL },
-              caption: `Downloaded by: *${botName}* \n\n_*🎀 Powered by:*_ *Scrappy API - by FantoX*\n\n_*🧩 Url:*_ https://github.com/FantoX001/Scrappy-API \n`,
+              caption: ` `,
             },
             { quoted: m }
           );
