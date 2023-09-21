@@ -44,36 +44,45 @@ module.exports = {
           m.from,
           {
             image: { url: song.thumbnail },
-            caption: `\n┌────[ *ᴅᴏᴡɴʟᴏᴅɪɴɢ* ]──···▸
-❏▸ Duration: *${song.timestamp}* 
-❏▸ Channel: *${song.author.name}*
-❏▸ Upload: *${song.ago}*
-❏
-└────────────────···▸\n`,
+            caption: `\n*Downloading:* *${song.title}*
+            
+⬡  Duration: *${song.timestamp}*
+
+⬡  Channel Name: *${song.author.name}*
+
+⬡  Video Uploaded: *${song.ago}*\n`,
           },
           { quoted: m }
         );
 
         YT.mp3(videoId).then((file) => {
           const inputPath = file.path;
-          const outputPath = inputPath + ".opus";
+          const outputPath = inputPath + ".mp3";
 
           ffmpeg(inputPath)
-            .format("opus")
+            .format("mp3")
             .on("error", (err) => {
-              console.error("Error converting to opus:", err);
+              console.error("Error converting to mp3:", err);
             })
             .on("end", async () => {
-              await Rudhra.sendPresenceUpdate("recording", m.from);
-
-              Rudhra.sendMessage(
-                m.from,
-                {
-                  audio: fs.readFileSync(outputPath),
-                  mimetype: "audio/mpeg",
-                  ptt: true,
-                },
-                { quoted: m }
+              const thumbnailBuffer = await getBuffer(song.thumbnail);
+            
+            Rudhra.sendMessage(
+              m.from,
+              {
+                audio: fs.readFileSync(outputPath),
+                mimetype: "audio/mp4",
+                contextInfo: {
+                  externalAdReply: {
+                    title: song.title.substr(0, 30),
+                    body: song.description.substr(0, 30),
+                    mediaType: 2,
+                    thumbnail: thumbnailBuffer,
+                    mediaUrl: song.url
+                  }
+                }
+              },
+              { quoted: m }
               );
 
               fs.unlinkSync(inputPath);
@@ -122,12 +131,12 @@ module.exports = {
 
         YT.mp3(videoId).then((file) => {
           const inputPath = file.path;
-          const outputPath = inputPath + ".opus";
+          const outputPath = inputPath + ".mp3";
 
           ffmpeg(inputPath)
-            .format("opus")
+            .format("mp3")
             .on("error", (err) => {
-              console.error("Error converting to opus:", err);
+              console.error("Error converting to mp3:", err);
             })
             .on("end", async () => {
               const thumbnailBuffer = await getBuffer(thumbRudhra);
@@ -275,4 +284,4 @@ module.exports = {
     }
   },
 };
-          
+    
