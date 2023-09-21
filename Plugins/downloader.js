@@ -38,7 +38,7 @@ module.exports = {
 
         try {
           const res = await axios.get(
-            "https://fantox001-scrappy-api.vercel.app/instadl?url=" + text
+            "https://vihangayt.me/download/instagram?url=" + text
           );
           const scrappedURL = res.data.videoUrl;
 
