@@ -203,10 +203,8 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
 
     if (body == prefix) {
       await doReact("⚡");
-      return m.reply(
-        `*Bot is Active ✓*`
-      );
     }
+    
     if (body.startsWith(prefix) && !icmd) {
       await doReact("❌");
     }
