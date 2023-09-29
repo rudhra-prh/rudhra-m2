@@ -209,6 +209,8 @@ module.exports = async (Rudhra, m, commands, chatUpdate) => {
     }
     if (body.startsWith(prefix) && !icmd) {
       await doReact("❌");
+      return m.reply(
+        ``
       );
     }
 
