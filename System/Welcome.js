@@ -23,11 +23,10 @@ module.exports = async (Rudhra, anu) => {
           }\n`
         );
         Rudhratext = `
-Hello @${WAuserName.split("@")[0]} Senpai,
+Hello @${WAuserName.split("@")[0]} ,
 
 Welcome to *${metadata.subject}*.
 
-*🧣 Group Description 🧣*
 
 ${desc}
 
@@ -49,7 +48,7 @@ ${desc}
           }\n`
         );
         Rudhratext = `
-  @${WAuserName.split("@")[0]} Senpai left the group.
+  @${WAuserName.split("@")[0]}  left the group.
   `;
         if (WELstatus) {
           await Rudhra.sendMessage(anu.id, {
